@@ -91,7 +91,7 @@ class RootDefaults {
         this.style = style.decorate(decoration)
     }
 
-    fun without(color: TextColor?) {
+    fun without(color: TextColor) {
         this.style = style.color(null)
     }
 
