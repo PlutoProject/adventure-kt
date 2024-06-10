@@ -1,82 +1,84 @@
 package ink.nostal.advkt
 
 import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextColor
 
-
-fun rgb(r: Int, g: Int, b: Int): Style {
-    return Style.style(TextColor.color(r, g, b))
+fun color(): TextColor { // this method is used for "without" method
+    return rgb(0)
 }
 
-fun rgb(rgb: Int): Style {
-    return Style.style(TextColor.color(rgb))
+fun rgb(r: Int, g: Int, b: Int): TextColor {
+    return TextColor.color(r, g, b)
 }
 
-fun hex(hex: String): Style {
-    return Style.style(TextColor.fromHexString(hex))
+fun rgb(rgb: Int): TextColor {
+    return TextColor.color(rgb)
 }
 
-fun black(): Style {
-    return Style.style(NamedTextColor.BLACK)
+fun hex(hex: String): TextColor {
+    return TextColor.fromHexString(hex)!!
 }
 
-fun darkBlue(): Style {
-    return Style.style(NamedTextColor.DARK_BLUE)
+fun black(): TextColor {
+    return NamedTextColor.BLACK
 }
 
-fun darkGreen(): Style {
-    return Style.style(NamedTextColor.DARK_GREEN)
+fun darkBlue(): TextColor {
+    return NamedTextColor.DARK_BLUE
 }
 
-fun darkAqua(): Style {
-    return Style.style(NamedTextColor.DARK_AQUA)
+fun darkGreen(): TextColor {
+    return NamedTextColor.DARK_GREEN
 }
 
-fun darkRed(): Style {
-    return Style.style(NamedTextColor.DARK_RED)
+fun darkAqua(): TextColor {
+    return NamedTextColor.DARK_AQUA
 }
 
-fun darkPurple(): Style {
-    return Style.style(NamedTextColor.DARK_PURPLE)
+fun darkRed(): TextColor {
+    return NamedTextColor.DARK_RED
 }
 
-fun gold(): Style {
-    return Style.style(NamedTextColor.GOLD)
+fun darkPurple(): TextColor {
+    return NamedTextColor.DARK_PURPLE
 }
 
-fun gray(): Style {
-    return Style.style(NamedTextColor.GRAY)
+fun gold(): TextColor {
+    return NamedTextColor.GOLD
 }
 
-fun darkGray(): Style {
-    return Style.style(NamedTextColor.DARK_GRAY)
+fun gray(): TextColor {
+    return NamedTextColor.GRAY
 }
 
-fun blue(): Style {
-    return Style.style(NamedTextColor.BLUE)
+fun darkGray(): TextColor {
+    return NamedTextColor.DARK_GRAY
 }
 
-fun green(): Style {
-    return Style.style(NamedTextColor.GREEN)
+fun blue(): TextColor {
+    return NamedTextColor.BLUE
 }
 
-fun aqua(): Style {
-    return Style.style(NamedTextColor.AQUA)
+fun green(): TextColor {
+    return NamedTextColor.GREEN
 }
 
-fun red(): Style {
-    return Style.style(NamedTextColor.RED)
+fun aqua(): TextColor {
+    return NamedTextColor.AQUA
 }
 
-fun lightPurple(): Style {
-    return Style.style(NamedTextColor.LIGHT_PURPLE)
+fun red(): TextColor {
+    return NamedTextColor.RED
 }
 
-fun yellow(): Style {
-    return Style.style(NamedTextColor.YELLOW)
+fun lightPurple(): TextColor {
+    return NamedTextColor.LIGHT_PURPLE
 }
 
-fun white(): Style {
-    return Style.style(NamedTextColor.WHITE)
+fun yellow(): TextColor {
+    return NamedTextColor.YELLOW
+}
+
+fun white(): TextColor {
+    return NamedTextColor.WHITE
 }

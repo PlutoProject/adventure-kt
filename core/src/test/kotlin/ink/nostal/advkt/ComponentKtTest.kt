@@ -28,7 +28,7 @@ fun test() {
             it.send {
                 text("You just click a text!")
             }
-        }
+        } without color()
 
         empty() // this can do nothing, but I added it lol
 

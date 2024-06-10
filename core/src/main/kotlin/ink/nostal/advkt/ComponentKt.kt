@@ -4,6 +4,8 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
 import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 
 interface ComponentKt {
@@ -26,8 +28,13 @@ class RootComponentKt : ComponentKt {
     internal var defaults: RootDefaults? = null
     internal val components: MutableList<ComponentKt> = mutableListOf()
 
-    infix fun TextComponentKt.with(style: Style): TextComponentKt {
-        this.component = this.component.style(this.component.style().merge(style))
+    infix fun TextComponentKt.with(color: TextColor): TextComponentKt {
+        this.component = this.component.color(color)
+        return this
+    }
+
+    infix fun TextComponentKt.with(decoration: TextDecoration): TextComponentKt {
+        this.component = this.component.decorate(decoration)
         return this
     }
 
@@ -41,8 +48,13 @@ class RootComponentKt : ComponentKt {
         return this
     }
 
-    infix fun TextComponentKt.without(style: Style): TextComponentKt {
-        this.component = this.component.style(this.component.style().unmerge(style))
+    infix fun TextComponentKt.without(decoration: TextDecoration): TextComponentKt {
+        this.component = this.component.decoration(decoration, false)
+        return this
+    }
+
+    infix fun TextComponentKt.without(color: TextColor): TextComponentKt {
+        this.component = this.component.color(null)
         return this
     }
 
@@ -71,8 +83,20 @@ class RootDefaults {
     internal var hoverEvent: HoverEvent<*>? = null
     internal var clickEvent: ClickEvent? = null
 
-    fun with(style: Style) {
-        this.style = style.merge(style)
+    fun with(color: TextColor) {
+        this.style = style.color(color)
+    }
+
+    fun with(decoration: TextDecoration) {
+        this.style = style.decorate(decoration)
+    }
+
+    fun without(color: TextColor?) {
+        this.style = style.color(null)
+    }
+
+    fun without(decoration: TextDecoration) {
+        this.style = style.decoration(decoration, false)
     }
 
     fun with(hoverEvent: HoverEvent<*>) {
