@@ -1,0 +1,10 @@
+[versions]
+kotlin = "2.0.0"
+adventrue = "4.17.0"
+
+[libraries]
+adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventrue" }
+adventure-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventrue" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
