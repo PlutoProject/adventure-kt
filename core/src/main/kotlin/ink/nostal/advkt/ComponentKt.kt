@@ -97,6 +97,10 @@ fun RootComponentKt.provide(miniMessage: MiniMessage) {
     this.miniMessage = miniMessage
 }
 
+fun RootComponentKt.provide(builder: MiniMessage.Builder.() -> Unit) {
+    this.miniMessage = MiniMessage.builder().apply(builder).build()
+}
+
 fun RootComponentKt.component(content: RootComponentKt.() -> Unit) {
     val component = RootComponentKt()
     component.miniMessage = this.miniMessage

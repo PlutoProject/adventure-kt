@@ -1,6 +1,7 @@
 package ink.nostal.advkt
 
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 
 fun test() {
     val text = component {
@@ -38,6 +39,11 @@ fun test() {
         keybind("key.keyboard.space") // should be "空格" under Simplified Chinese
 
         component {
+            provide {
+                strict(false)
+                tags(TagResolver.standard())
+            }
+
             text("You can even 套娃 in the component")
         }
     }
