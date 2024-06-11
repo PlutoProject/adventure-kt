@@ -3,6 +3,7 @@ kotlin = "2.0.0"
 adventrue = "4.17.0"
 
 [libraries]
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventrue" }
 adventure-text-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventrue" }
 adventure-text-serializer-gson = { group = "net.kyori", name = "adventure-text-serializer-gson", version.ref = "adventrue" }
