@@ -1,5 +1,6 @@
 package ink.nostal.advkt
 
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 
@@ -45,6 +46,17 @@ fun main() {
             }
 
             text("You can even 套娃 in the component")
+        }
+
+        newline()
+
+        component {
+            join {
+                separator(Component.text("!"))
+            }
+            text("first")
+            text("second")
+            text("third")
         }
     }
 

@@ -1,6 +1,7 @@
 package ink.nostal.advkt
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.JoinConfiguration
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
 import net.kyori.adventure.text.format.Style
@@ -27,10 +28,11 @@ class TextComponentKt(internal var component: Component) : ComponentKt {
 
 }
 
-class RootComponentKt : ComponentKt {
+open class RootComponentKt : ComponentKt {
 
     internal var miniMessage: MiniMessage = MiniMessage.miniMessage()
     internal var defaults: RootDefaults? = null
+    internal var join: JoinConfiguration? = null
     internal val components: MutableList<ComponentKt> = mutableListOf()
 
     infix fun TextComponentKt.with(styleKt: StyleKt): TextComponentKt {
@@ -54,20 +56,24 @@ class RootComponentKt : ComponentKt {
     }
 
     override fun build(): Component {
-        var root = Component.empty()
-        if (this.defaults != null) {
-            root = root.style(this.defaults!!.style)
-            if (this.defaults!!.hoverEvent != null) {
-                root = root.hoverEvent(this.defaults!!.hoverEvent)
+        if (join == null) {
+            var root = Component.empty()
+            if (this.defaults != null) {
+                root = root.style(this.defaults!!.style)
+                if (this.defaults!!.hoverEvent != null) {
+                    root = root.hoverEvent(this.defaults!!.hoverEvent)
+                }
+                if (this.defaults!!.clickEvent != null) {
+                    root = root.clickEvent(this.defaults!!.clickEvent)
+                }
             }
-            if (this.defaults!!.clickEvent != null) {
-                root = root.clickEvent(this.defaults!!.clickEvent)
+            for (component in this.components) {
+                root = root.append(component.build())
             }
+            return root
+        } else {
+            return Component.join(this.join!!, this.components.map { it.build() })
         }
-        for (component in this.components) {
-            root = root.append(component.build())
-        }
-        return root
     }
 
 }
@@ -116,6 +122,16 @@ fun RootComponentKt.component(content: RootComponentKt.() -> Unit) {
     val component = RootComponentKt()
     component.miniMessage = this.miniMessage
     this.components.add(component.apply(content))
+}
+
+fun RootComponentKt.join(content: JoinConfiguration.Builder.() -> Unit) {
+    this.join = JoinConfiguration.builder().apply(content).build()
+}
+
+fun RootComponentKt.raw(text: Component): TextComponentKt {
+    val component = TextComponentKt(text)
+    this.components.add(component)
+    return component
 }
 
 fun RootComponentKt.text(text: String): TextComponentKt {
