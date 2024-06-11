@@ -1,4 +1,4 @@
-package ink.nostal.advkt
+package ink.pmc.advkt
 
 import net.kyori.adventure.text.format.TextDecoration
 
