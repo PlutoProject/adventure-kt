@@ -31,9 +31,10 @@ class TitleTimesKt : TimesKt {
 
 }
 
-fun times(content: TitleTimesKt.() -> Unit): Times {
+// I think nobody will use this separately
+/*fun times(content: TitleTimesKt.() -> Unit): Times {
     return TitleTimesKt().apply(content).build()
-}
+}*/
 
 fun TitleTimesKt.fadeIn(duration: Duration) {
     fadeIn = duration

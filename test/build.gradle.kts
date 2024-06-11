@@ -12,7 +12,3 @@ dependencies {
     implementation(libs.adventure.text.serializer.plain)
     implementation(libs.adventure.text.serializer.ansi)
 }
-
-kotlin {
-    jvmToolchain(8)
-}
