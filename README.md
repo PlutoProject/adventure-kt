@@ -41,6 +41,10 @@ tasks.shadowJar {
 }
 ```
 
+## 🗯️ chat
+
+- QQ Group: 682322881
+
 ## ☕ examples
 
 ### creating a component
