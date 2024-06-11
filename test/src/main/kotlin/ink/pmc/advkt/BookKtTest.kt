@@ -1,4 +1,4 @@
-package ink.nostal.advkt
+package ink.pmc.advkt
 
 fun main() {
     val book = book {
