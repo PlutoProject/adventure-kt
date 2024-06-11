@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.book
 
 import ink.pmc.advkt.component.RootComponentKt
 import net.kyori.adventure.inventory.Book

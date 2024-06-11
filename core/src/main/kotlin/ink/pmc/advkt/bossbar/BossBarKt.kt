@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.bossbar
 
 import ink.pmc.advkt.component.RootComponentKt
 import ink.pmc.advkt.component.component

@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.sound
 
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.sound.Sound

@@ -1,6 +1,9 @@
 package ink.pmc.advkt
 
+import ink.pmc.advkt.book.BookKt
+import ink.pmc.advkt.bossbar.BossBarKt
 import ink.pmc.advkt.component.RootComponentKt
+import ink.pmc.advkt.sound.SoundKt
 import ink.pmc.advkt.title.ComponentTitleKt
 import net.kyori.adventure.audience.Audience
 
