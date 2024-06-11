@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.title
 
 import net.kyori.adventure.title.Title.Times
 import net.kyori.adventure.util.Ticks

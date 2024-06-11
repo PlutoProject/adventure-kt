@@ -1,5 +1,7 @@
 package ink.pmc.advkt
 
+import ink.pmc.advkt.component.RootComponentKt
+import ink.pmc.advkt.title.ComponentTitleKt
 import net.kyori.adventure.audience.Audience
 
 fun Audience.send(message: RootComponentKt.() -> Unit) {
@@ -20,4 +22,20 @@ fun Audience.sendActionBar(actionbar: RootComponentKt.() -> Unit) {
 
 fun Audience.playSound(sound: SoundKt.() -> Unit) {
     this.playSound(SoundKt().apply(sound).build())
+}
+
+fun Audience.playSound(x: Double, y: Double, z: Double, sound: SoundKt.() -> Unit) {
+    this.playSound(SoundKt().apply(sound).build(), x, y, z)
+}
+
+fun Audience.showBossBar(bossBar: BossBarKt.() -> Unit) {
+    this.showBossBar(BossBarKt().apply(bossBar).build())
+}
+
+fun Audience.sendPlayerListHeader(content: RootComponentKt.() -> Unit) {
+    this.sendPlayerListHeader(RootComponentKt().apply(content).build())
+}
+
+fun Audience.sendPlayerListFooter(content: RootComponentKt.() -> Unit) {
+    this.sendPlayerListFooter(RootComponentKt().apply(content).build())
 }

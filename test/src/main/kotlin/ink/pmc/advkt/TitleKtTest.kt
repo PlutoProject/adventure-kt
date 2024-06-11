@@ -1,5 +1,9 @@
 package ink.pmc.advkt
 
+import ink.pmc.advkt.component.aqua
+import ink.pmc.advkt.component.red
+import ink.pmc.advkt.component.text
+import ink.pmc.advkt.title.*
 import kotlin.time.Duration.Companion.seconds
 
 fun main() {

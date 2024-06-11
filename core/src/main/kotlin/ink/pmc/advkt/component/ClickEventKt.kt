@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.component
 
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.event.ClickCallback

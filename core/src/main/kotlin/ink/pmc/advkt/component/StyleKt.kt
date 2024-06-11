@@ -1,4 +1,4 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.component
 
 import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextColor

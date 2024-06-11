@@ -1,5 +1,6 @@
-package ink.pmc.advkt
+package ink.pmc.advkt.title
 
+import ink.pmc.advkt.component.RootComponentKt
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.title.Title
 import net.kyori.adventure.title.Title.Times

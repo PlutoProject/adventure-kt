@@ -1,5 +1,6 @@
 package ink.pmc.advkt
 
+import ink.pmc.advkt.component.RootComponentKt
 import net.kyori.adventure.inventory.Book
 import net.kyori.adventure.text.Component
 

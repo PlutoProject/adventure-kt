@@ -1,5 +1,7 @@
 package ink.pmc.advkt
 
+import ink.pmc.advkt.component.text
+
 fun main() {
     val book = book {
         title {

@@ -8,21 +8,23 @@ import net.kyori.adventure.sound.Sound.Type
 class SoundKt {
 
     object Defaults {
+        val key = Key.key("block.note_block.hat")
+        val source = Source.MASTER
         const val VOLUME = 1.0F
         const val PITCH = 1.0F
     }
 
-    internal var key: Key? = null
+    internal var key: Key = Defaults.key
     internal var type: Type? = null
-    internal var source: Source? = null
+    internal var source: Source = Defaults.source
     internal var volume: Float = Defaults.VOLUME
     internal var pitch: Float = Defaults.PITCH
 
     fun build(): Sound {
-        return if (key != null) {
-            Sound.sound(key!!, source!!, volume, pitch)
+        return if (type == null) {
+            Sound.sound(key, source, volume, pitch)
         } else {
-            Sound.sound(type!!, source!!, volume, pitch)
+            Sound.sound(type!!, source, volume, pitch)
         }
     }
 
