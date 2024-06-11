@@ -40,3 +40,41 @@ tasks.shadowJar {
     relocate("ink.pmc.advkt", "com.example.libs.advkt")
 }
 ```
+
+## ☕ 实例
+
+### 创建一个组件
+
+```kotlin
+component {
+    text("这是一个文字组件，没什么特殊的。")
+    text("这是一个有颜色的文字组件。") with red()
+    text("这是一个有颜色的文字组件。") with color(249, 226, 145) // 支持 RGB 和 16 进制颜色。
+    newline()
+    text("这是一个有样式的文字组件。") with bold() without italic()
+}
+
+// 你也可以使用这样的语法
+player.send {
+    text("这是一个文字组件，没什么特殊的。")
+}
+```
+
+### 创建一个标题
+
+```kotlin
+title {
+    mainTitle {
+        text("这是一个主标题。")
+    }
+    subTitle {
+        text("这是一个副标题。")
+    }
+    // 支持传入 Kotlin Duration 和 Java Duration
+    times {
+        fadeIn(1.seconds)
+        stay(1.seconds)
+        fadeOut(1.seconds)
+    }
+}
+```

@@ -24,7 +24,7 @@ This project aimed to create many DSL utilities for adventure's builder pattern 
 
 ```kotlin
 repositories {
-    maven(uri("https://maven.nostal.ink/repository/maven-public"))
+    maven(uri("https://maven.nostal.ink/repository/maven-public/"))
 }
 ```
 
@@ -32,11 +32,49 @@ repositories {
 
 ```kotlin
 dependencies {
-    // Use shadowJar to shade the artifact in your jar
+    // Use shadowJar to shade the artifact into your jar
     api("ink.pmc.advkt:core:1.0.0-SNAPSHOT")
 }
 
 tasks.shadowJar {
     relocate("ink.pmc.advkt", "com.example.libs.advkt")
+}
+```
+
+## ☕ examples
+
+### creating a component
+
+```kotlin
+component {
+    text("This is a text component, nothing special.")
+    text("This is a colorized text component.") with red()
+    text("This is a colorized text component.") with color(249, 226, 145) // support RGB and hex color
+    newline()
+    text("This is a styled text component.") with bold() without italic()
+}
+
+// you can also use the following syntax
+player.send {
+    text("This is a text component, nothing special.")
+}
+```
+
+### creating a title
+
+```kotlin
+title {
+    mainTitle {
+        text("This is a main title.")
+    }
+    subTitle {
+        text("This is a sub title.")
+    }
+    // support both Kotlin duration and Java duration
+    times {
+        fadeIn(1.seconds)
+        stay(1.seconds)
+        fadeOut(1.seconds)
+    }
 }
 ```
