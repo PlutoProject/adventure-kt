@@ -28,13 +28,8 @@ class RootComponentKt : ComponentKt {
     internal var defaults: RootDefaults? = null
     internal val components: MutableList<ComponentKt> = mutableListOf()
 
-    infix fun TextComponentKt.with(color: TextColor): TextComponentKt {
-        this.component = this.component.color(color)
-        return this
-    }
-
-    infix fun TextComponentKt.with(decoration: TextDecoration): TextComponentKt {
-        this.component = this.component.decorate(decoration)
+    infix fun TextComponentKt.with(styleKt: StyleKt): TextComponentKt {
+        this.component = this.component.style(styleKt.with(this.component.style()))
         return this
     }
 
@@ -48,13 +43,8 @@ class RootComponentKt : ComponentKt {
         return this
     }
 
-    infix fun TextComponentKt.without(decoration: TextDecoration): TextComponentKt {
-        this.component = this.component.decoration(decoration, false)
-        return this
-    }
-
-    infix fun TextComponentKt.without(color: TextColor): TextComponentKt {
-        this.component = this.component.color(null)
+    infix fun TextComponentKt.without(styleKt: StyleKt): TextComponentKt {
+        this.component = this.component.style(styleKt.without(this.component.style()))
         return this
     }
 
@@ -83,20 +73,12 @@ class RootDefaults {
     internal var hoverEvent: HoverEvent<*>? = null
     internal var clickEvent: ClickEvent? = null
 
-    fun with(color: TextColor) {
-        this.style = style.color(color)
+    fun with(styleKt: StyleKt) {
+        this.style = styleKt.with(this.style)
     }
 
-    fun with(decoration: TextDecoration) {
-        this.style = style.decorate(decoration)
-    }
-
-    fun without(color: TextColor) {
-        this.style = style.color(null)
-    }
-
-    fun without(decoration: TextDecoration) {
-        this.style = style.decoration(decoration, false)
+    fun without(styleKt: StyleKt) {
+        this.style = styleKt.without(this.style)
     }
 
     fun with(hoverEvent: HoverEvent<*>) {

@@ -1,24 +1,23 @@
 package ink.nostal.advkt
 
-import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextDecoration
 
-fun obfuscated(): TextDecoration {
-    return TextDecoration.OBFUSCATED
+fun obfuscated(): TextDecorationKt {
+    return TextDecorationKt(TextDecoration.OBFUSCATED)
 }
 
-fun bold(): TextDecoration {
-    return TextDecoration.BOLD
+fun bold(): TextDecorationKt {
+    return TextDecorationKt(TextDecoration.BOLD)
 }
 
-fun strikethrough(): TextDecoration {
-    return TextDecoration.STRIKETHROUGH
+fun strikethrough(): TextDecorationKt {
+    return TextDecorationKt(TextDecoration.STRIKETHROUGH)
 }
 
-fun underlined(): TextDecoration {
-    return TextDecoration.UNDERLINED
+fun underlined(): TextDecorationKt {
+    return TextDecorationKt(TextDecoration.UNDERLINED)
 }
 
-fun italic(): TextDecoration {
-    return TextDecoration.ITALIC
+fun italic(): TextDecorationKt {
+    return TextDecorationKt(TextDecoration.ITALIC)
 }
