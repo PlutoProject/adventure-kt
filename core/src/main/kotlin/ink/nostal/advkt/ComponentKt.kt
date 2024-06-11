@@ -28,7 +28,7 @@ class TextComponentKt(internal var component: Component) : ComponentKt {
 
 }
 
-open class RootComponentKt : ComponentKt {
+class RootComponentKt : ComponentKt {
 
     internal var miniMessage: MiniMessage = MiniMessage.miniMessage()
     internal var defaults: RootDefaults? = null
