@@ -7,6 +7,11 @@ import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.serializer.ansi.ANSIComponentSerializer
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+import net.kyori.ansi.ColorLevel
 
 interface ComponentKt {
 
@@ -153,4 +158,20 @@ fun RootComponentKt.space(): TextComponentKt {
     val component = TextComponentKt(Component.space())
     this.components.add(component)
     return component
+}
+
+fun Component.json(): String {
+    return GsonComponentSerializer.gson().serialize(this)
+}
+
+fun Component.legacy(): String {
+    return LegacyComponentSerializer.legacySection().serialize(this)
+}
+
+fun Component.plain(): String {
+    return PlainTextComponentSerializer.plainText().serialize(this)
+}
+
+fun Component.ansi(): String {
+    return ANSIComponentSerializer.builder().colorLevel(ColorLevel.TRUE_COLOR).build().serialize(this)
 }

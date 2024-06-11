@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "adventure-kt"
 include("core")
+include("test")

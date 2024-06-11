@@ -16,6 +16,8 @@ fun rgb(rgb: Int): TextColorKt {
 }
 
 fun hex(hex: String): TextColorKt {
+    if (!hex.startsWith("#"))
+        return TextColorKt(TextColor.fromHexString("#$hex")!!)
     return TextColorKt(TextColor.fromHexString(hex)!!)
 }
 

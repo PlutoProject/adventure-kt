@@ -3,7 +3,7 @@ package ink.nostal.advkt
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 
-fun test() {
+fun main() {
     val text = component {
         defaults {
             with(rgb(1, 2, 3))
@@ -21,7 +21,7 @@ fun test() {
         } with hex("66ccff")
         newline()
 
-        text("With color red!") with rgb(123, 144, 133) with bold() without italic()
+        text("With color red!") with red() with bold() without italic()
         newline()
 
         text("Click me!") with callback {
@@ -47,4 +47,6 @@ fun test() {
             text("You can even 套娃 in the component")
         }
     }
+
+    println(text.ansi())
 }
