@@ -5,42 +5,46 @@ import net.kyori.adventure.text.event.ClickCallback
 import net.kyori.adventure.text.event.ClickEvent
 import java.net.URL
 
-fun openUrl(url: String): ClickEvent {
-    return ClickEvent.openUrl(url)
+fun clickEvent(): ClickEventWithoutKt {
+    return ClickEventWithoutKt()
 }
 
-fun openUrl(url: URL): ClickEvent {
-    return ClickEvent.openUrl(url)
+fun openUrl(url: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.openUrl(url))
 }
 
-fun openFile(file: String): ClickEvent {
-    return ClickEvent.openFile(file)
+fun openUrl(url: URL): ClickEventKt {
+    return ClickEventKt(ClickEvent.openUrl(url))
 }
 
-fun runCommand(command: String): ClickEvent {
-    return ClickEvent.runCommand(command)
+fun openFile(file: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.openFile(file))
 }
 
-fun suggestCommand(command: String): ClickEvent {
-    return ClickEvent.suggestCommand(command)
+fun runCommand(command: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.runCommand(command))
 }
 
-fun changePage(page: String): ClickEvent {
-    return ClickEvent.changePage(page)
+fun suggestCommand(command: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.suggestCommand(command))
 }
 
-fun changePage(page: Int): ClickEvent {
-    return ClickEvent.changePage(page)
+fun changePage(page: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.changePage(page))
 }
 
-fun copyToClipboard(text: String): ClickEvent {
-    return ClickEvent.copyToClipboard(text)
+fun changePage(page: Int): ClickEventKt {
+    return ClickEventKt(ClickEvent.changePage(page))
 }
 
-fun callback(function: (Audience) -> Unit): ClickEvent {
-    return ClickEvent.callback(function)
+fun copyToClipboard(text: String): ClickEventKt {
+    return ClickEventKt(ClickEvent.copyToClipboard(text))
 }
 
-fun callback(options: ClickCallback.Options, function: (Audience) -> Unit): ClickEvent {
-    return ClickEvent.callback(function, options)
+fun callback(function: (Audience) -> Unit): ClickEventKt {
+    return ClickEventKt(ClickEvent.callback(function))
+}
+
+fun callback(options: ClickCallback.Options, function: (Audience) -> Unit): ClickEventKt {
+    return ClickEventKt(ClickEvent.callback(function, options))
 }
