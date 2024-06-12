@@ -72,7 +72,7 @@ fun main() {
                     once()
                     match("[a-zA-Z0-9]+")
                     replace {
-                        text("")
+                        text("") with insertion("") // just showcase of insertion, i dont know what can it do
                     }
                 }
             }

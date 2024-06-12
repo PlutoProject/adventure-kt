@@ -37,6 +37,11 @@ class RootComponentKt : ComponentKt {
     internal var join: JoinConfiguration? = null
     internal val components: MutableList<ComponentKt> = mutableListOf()
 
+    infix fun TextComponentKt.with(styleKt: StyleKt): TextComponentKt {
+        this.component = this.component.style(styleKt.with(this.component.style()))
+        return this
+    }
+
     infix fun TextComponentKt.with(color: TextColor): TextComponentKt {
         this.component = this.component.color(color)
         return this
@@ -44,11 +49,6 @@ class RootComponentKt : ComponentKt {
 
     infix fun TextComponentKt.with(decoration: TextDecoration): TextComponentKt {
         this.component = this.component.decorate(decoration)
-        return this
-    }
-
-    infix fun TextComponentKt.with(styleKt: StyleKt): TextComponentKt {
-        this.component = this.component.style(styleKt.with(this.component.style()))
         return this
     }
 
@@ -62,6 +62,11 @@ class RootComponentKt : ComponentKt {
         return this
     }
 
+    infix fun TextComponentKt.without(styleKt: StyleKt): TextComponentKt {
+        this.component = this.component.style(styleKt.without(this.component.style()))
+        return this
+    }
+
     infix fun TextComponentKt.without(decoration: TextDecoration): TextComponentKt {
         this.component = this.component.decoration(decoration, false)
         return this
@@ -69,11 +74,6 @@ class RootComponentKt : ComponentKt {
 
     infix fun TextComponentKt.without(color: TextColor): TextComponentKt {
         this.component = this.component.color(null)
-        return this
-    }
-
-    infix fun TextComponentKt.without(styleKt: StyleKt): TextComponentKt {
-        this.component = this.component.style(styleKt.without(this.component.style()))
         return this
     }
 
@@ -124,16 +124,32 @@ class RootDefaults {
         this.style = styleKt.with(this.style)
     }
 
+    fun with(color: TextColor) {
+        this.style = this.style.color(color)
+    }
+
+    fun with(decoration: TextDecoration) {
+        this.style = this.style.decorate(decoration)
+    }
+
+    fun with(hoverEvent: HoverEvent<*>) {
+        this.style = this.style.hoverEvent(hoverEvent)
+    }
+
+    fun with(clickEvent: ClickEvent) {
+        this.style = this.style.clickEvent(clickEvent)
+    }
+
     fun without(styleKt: StyleKt) {
         this.style = styleKt.without(this.style)
     }
 
-    fun with(hoverEvent: HoverEvent<*>) {
-        this.hoverEvent = hoverEvent
+    fun without(decoration: TextDecoration) {
+        this.style = this.style.decoration(decoration, false)
     }
 
-    fun with(clickEvent: ClickEvent) {
-        this.clickEvent = clickEvent
+    fun without(color: TextColor) {
+        this.style = this.style.color(null)
     }
 
 }
@@ -197,6 +213,43 @@ fun RootComponentKt.raw(text: Component): TextComponentKt {
 }
 
 fun RootComponentKt.text(text: String): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+fun RootComponentKt.text(text: Char): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+fun RootComponentKt.text(text: Boolean): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+fun RootComponentKt.text(text: Int): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+
+fun RootComponentKt.text(text: Long): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+fun RootComponentKt.text(text: Float): TextComponentKt {
+    val component = TextComponentKt(Component.text(text))
+    this.components.add(component)
+    return component
+}
+
+fun RootComponentKt.text(text: Double): TextComponentKt {
     val component = TextComponentKt(Component.text(text))
     this.components.add(component)
     return component
