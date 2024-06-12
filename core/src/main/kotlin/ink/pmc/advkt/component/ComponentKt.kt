@@ -1,7 +1,5 @@
 package ink.pmc.advkt.component
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-import net.kyori.adventure.inventory.Book
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.JoinConfiguration
 import net.kyori.adventure.text.TextReplacementConfig
@@ -16,7 +14,6 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import net.kyori.ansi.ColorLevel
-import java.util.regex.Pattern
 
 interface ComponentKt {
 
