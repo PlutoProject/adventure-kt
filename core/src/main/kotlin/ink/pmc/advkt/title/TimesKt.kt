@@ -18,7 +18,7 @@ class TitleTimesKt : TimesKt {
     object Defaults {
         val fadeIn = Ticks.duration(10)
         val stay = Ticks.duration(70)
-        val fadeOut =  Ticks.duration(20)
+        val fadeOut = Ticks.duration(20)
     }
 
     internal var fadeIn = Defaults.fadeIn

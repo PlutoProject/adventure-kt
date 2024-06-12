@@ -7,6 +7,10 @@ fun color(): TextColorWithoutKt { // this method is used for "without" method
     return TextColorWithoutKt()
 }
 
+fun color(textColor: TextColor): TextColorKt {
+    return TextColorKt(textColor)
+}
+
 fun rgb(r: Int, g: Int, b: Int): TextColorKt {
     return TextColorKt(TextColor.color(r, g, b))
 }

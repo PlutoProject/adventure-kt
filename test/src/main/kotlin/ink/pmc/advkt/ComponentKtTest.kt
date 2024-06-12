@@ -18,6 +18,16 @@ fun main() {
                 .build()
         )
 
+        replacements {
+            replacement {
+                once()
+                match("[a-zA-Z0-9]+")
+                replace {
+                    text("")
+                }
+            }
+        }
+
         text("Hello world") with showText {
             text("Hover")
         } with hex("66ccff")
@@ -54,6 +64,17 @@ fun main() {
         component {
             join {
                 separator(Component.text("!"))
+            }
+
+            replacements {
+                override()
+                replacement {
+                    once()
+                    match("[a-zA-Z0-9]+")
+                    replace {
+                        text("")
+                    }
+                }
             }
             text("first")
             text("second")

@@ -13,7 +13,7 @@ class BossBarKt {
         val overlay: BossBar.Overlay = BossBar.Overlay.PROGRESS
     }
 
-    internal var name: Component = component {  }
+    internal var name: Component = component { }
     internal var progress: Float = Defaults.PROGRESS
     internal var color: BossBar.Color = Defaults.color
     internal var overlay: BossBar.Overlay = Defaults.overlay

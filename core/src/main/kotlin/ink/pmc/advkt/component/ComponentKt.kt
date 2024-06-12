@@ -1,16 +1,22 @@
 package ink.pmc.advkt.component
 
+import com.sun.org.apache.xpath.internal.operations.Bool
+import net.kyori.adventure.inventory.Book
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.JoinConfiguration
+import net.kyori.adventure.text.TextReplacementConfig
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
 import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.serializer.ansi.ANSIComponentSerializer
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import net.kyori.ansi.ColorLevel
+import java.util.regex.Pattern
 
 interface ComponentKt {
 
@@ -30,8 +36,19 @@ class RootComponentKt : ComponentKt {
 
     internal var miniMessage: MiniMessage = MiniMessage.miniMessage()
     internal var defaults: RootDefaults? = null
+    internal var replaces: RootReplaces? = null
     internal var join: JoinConfiguration? = null
     internal val components: MutableList<ComponentKt> = mutableListOf()
+
+    infix fun TextComponentKt.with(color: TextColor): TextComponentKt {
+        this.component = this.component.color(color)
+        return this
+    }
+
+    infix fun TextComponentKt.with(decoration: TextDecoration): TextComponentKt {
+        this.component = this.component.decorate(decoration)
+        return this
+    }
 
     infix fun TextComponentKt.with(styleKt: StyleKt): TextComponentKt {
         this.component = this.component.style(styleKt.with(this.component.style()))
@@ -48,6 +65,16 @@ class RootComponentKt : ComponentKt {
         return this
     }
 
+    infix fun TextComponentKt.without(decoration: TextDecoration): TextComponentKt {
+        this.component = this.component.decoration(decoration, false)
+        return this
+    }
+
+    infix fun TextComponentKt.without(color: TextColor): TextComponentKt {
+        this.component = this.component.color(null)
+        return this
+    }
+
     infix fun TextComponentKt.without(styleKt: StyleKt): TextComponentKt {
         this.component = this.component.style(styleKt.without(this.component.style()))
         return this
@@ -55,7 +82,7 @@ class RootComponentKt : ComponentKt {
 
     override fun build(): Component {
         if (join == null) {
-            var root = Component.empty()
+            var root: Component = Component.empty()
             if (this.defaults != null) {
                 root = root.style(this.defaults!!.style)
                 if (this.defaults!!.hoverEvent != null) {
@@ -68,10 +95,24 @@ class RootComponentKt : ComponentKt {
             for (component in this.components) {
                 root = root.append(component.build())
             }
-            return root
+            return applyReplacement(root)
         } else {
-            return Component.join(this.join!!, this.components.map { it.build() })
+            return Component.join(this.join!!, this.components.map { applyReplacement(it.build()) })
         }
+    }
+
+    private fun applyReplacement(component: Component): Component {
+        var variable = component
+        if (this.replaces != null) {
+            var replacer = this.replaces
+            while (replacer?.parent != null && !replacer.overriden) {
+                for (replacementConfig in replacer.replaces) {
+                    variable = variable.replaceText(replacementConfig)
+                }
+                replacer = replacer.parent
+            }
+        }
+        return variable
     }
 
 }
@@ -100,6 +141,15 @@ class RootDefaults {
 
 }
 
+class RootReplaces(
+    internal val parent: RootReplaces?,
+) {
+
+    internal var overriden: Boolean = false
+    internal val replaces: MutableList<TextReplacementConfig> = mutableListOf()
+
+}
+
 fun component(content: RootComponentKt.() -> Unit): Component {
     return RootComponentKt().apply(content).build()
 }
@@ -119,11 +169,28 @@ fun RootComponentKt.provide(builder: MiniMessage.Builder.() -> Unit) {
 fun RootComponentKt.component(content: RootComponentKt.() -> Unit) {
     val component = RootComponentKt()
     component.miniMessage = this.miniMessage
+    component.replaces = this.replaces
     this.components.add(component.apply(content))
 }
 
 fun RootComponentKt.join(content: JoinConfiguration.Builder.() -> Unit) {
     this.join = JoinConfiguration.builder().apply(content).build()
+}
+
+fun RootComponentKt.replacements(content: RootReplaces.() -> Unit) {
+    if (this.replaces != null) {
+        this.replaces!!.apply(content)
+    } else {
+        this.replaces = RootReplaces(null).apply(content)
+    }
+}
+
+fun RootReplaces.replacement(content: TextReplacementConfig.Builder.() -> Unit) {
+    this.replaces.add(TextReplacementConfig.builder().apply(content).build())
+}
+
+fun RootReplaces.override() {
+    this.overriden = true
 }
 
 fun RootComponentKt.raw(text: Component): TextComponentKt {
@@ -188,4 +255,33 @@ fun Component.plain(): String {
 
 fun Component.ansi(): String {
     return ANSIComponentSerializer.builder().colorLevel(ColorLevel.TRUE_COLOR).build().serialize(this)
+}
+
+fun Component.replace(string: String, component: Component): Component {
+    val replaceConfig = TextReplacementConfig.builder()
+        .match(string)
+        .replacement(component)
+        .build()
+
+    return this.replaceText(replaceConfig)
+}
+
+fun Component.replace(string: String, text: String): Component {
+    return this.replace(string, Component.text(text))
+}
+
+fun Component.replaceColor(targetColor: TextColor, newColor: TextColor): Component {
+    val updatedComponent = if (this.color() == targetColor) {
+        this.color(newColor)
+    } else {
+        this
+    }
+
+    return updatedComponent.children().fold(updatedComponent.children(emptyList())) { component, child ->
+        component.append(child.replaceColor(targetColor, newColor))
+    }
+}
+
+fun TextReplacementConfig.Builder.replace(content: RootComponentKt.() -> Unit) {
+    this.replacement(RootComponentKt().apply(content).build())
 }
