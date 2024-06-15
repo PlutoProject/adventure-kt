@@ -26,7 +26,7 @@ open class TextColorWithoutKt : StyleKt {
 
 }
 
-class TextColorKt(private val textColor: TextColor) : TextColorWithoutKt() {
+class TextColorKt(internal val textColor: TextColor) : TextColorWithoutKt() {
 
     override fun with(original: Style): Style {
         return original.color(this.textColor)
@@ -86,7 +86,7 @@ class HoverEventKt(private val hoverEvent: HoverEvent<*>) : HoverEventWithoutKt(
 
 }
 
-open class InsertionWithoutKt() : StyleKt {
+open class InsertionWithoutKt : StyleKt {
 
     override fun with(original: Style): Style {
         throw IllegalAccessException("This style is only for without use")

@@ -80,6 +80,10 @@ fun main() {
             text("second")
             text("third")
         }
+
+        newline()
+
+        text("Lemme test this annoying gradient with a very very long string like this!") with gradient(red(), yellow(), blue())
     }
 
     println(text.ansi())

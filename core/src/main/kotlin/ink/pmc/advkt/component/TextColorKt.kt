@@ -3,6 +3,27 @@ package ink.pmc.advkt.component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextColor
 
+class GradientColor(
+    private val from: TextColor,
+    private val to: TextColor,
+    private val more: List<TextColor>
+) {
+
+    fun buildString(): String {
+        val builder = StringBuilder()
+        builder.append(":")
+            .append(this.from.asHexString())
+            .append(":")
+            .append(this.to.asHexString())
+        for (color in this.more) {
+            builder.append(":")
+                .append(color.asHexString())
+        }
+        return builder.toString()
+    }
+
+}
+
 fun color(): TextColorWithoutKt { // this method is used for "without" method
     return TextColorWithoutKt()
 }
@@ -23,6 +44,38 @@ fun hex(hex: String): TextColorKt {
     if (!hex.startsWith("#"))
         return TextColorKt(TextColor.fromHexString("#$hex")!!)
     return TextColorKt(TextColor.fromHexString(hex)!!)
+}
+
+fun gradient(from: TextColor, to: TextColor, vararg more: TextColor): GradientColor {
+    return GradientColor(from, to, listOf(*more))
+}
+
+fun gradient(from: TextColorKt, to: TextColorKt, vararg more: TextColor): GradientColor {
+    return GradientColor(from.textColor, to.textColor, listOf(*more))
+}
+
+fun gradient(from: TextColor, to: TextColor, vararg more: TextColorKt): GradientColor {
+    return GradientColor(from, to, more.map { it.textColor })
+}
+
+fun gradient(from: TextColorKt, to: TextColorKt, vararg more: TextColorKt): GradientColor {
+    return GradientColor(from.textColor, to.textColor, more.map { it.textColor })
+}
+
+fun gradient(from: TextColorKt, to: TextColor, vararg more: TextColor): GradientColor {
+    return GradientColor(from.textColor, to, listOf(*more))
+}
+
+fun gradient(from: TextColor, to: TextColorKt, vararg more: TextColor): GradientColor {
+    return GradientColor(from, to.textColor, listOf(*more))
+}
+
+fun gradient(from: TextColorKt, to: TextColor, vararg more: TextColorKt): GradientColor {
+    return GradientColor(from.textColor, to, more.map { it.textColor })
+}
+
+fun gradient(from: TextColor, to: TextColorKt, vararg more: TextColorKt): GradientColor {
+    return GradientColor(from, to.textColor, more.map { it.textColor })
 }
 
 fun black(): TextColorKt {

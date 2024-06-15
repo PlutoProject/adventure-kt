@@ -4,4 +4,4 @@
 # test result in local terminal
 
 ../gradlew shadowJar
-java -cp ../test/build/libs/test-1.0-SNAPSHOT.jar ink/nostal/advkt/ComponenKtTestKt
+java -cp ../test/build/libs/test-1.0-SNAPSHOT.jar ink/pmc/advkt/ComponenKtTestKt

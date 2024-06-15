@@ -47,6 +47,13 @@ class RootComponentKt : ComponentKt {
         return this
     }
 
+    infix fun TextComponentKt.with(color: GradientColor): TextComponentKt {
+        this.component = this@RootComponentKt.miniMessage.deserialize(
+            "<gradient${color.buildString()}>${this@RootComponentKt.miniMessage.serialize(this.component)}</gradient>"
+        )
+        return this
+    }
+
     infix fun TextComponentKt.with(decoration: TextDecoration): TextComponentKt {
         this.component = this.component.decorate(decoration)
         return this
