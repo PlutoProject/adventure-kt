@@ -170,7 +170,7 @@ class RootReplaces(
 
 }
 
-fun component(content: RootComponentKt.() -> Unit): Component {
+inline fun component(content: RootComponentKt.() -> Unit): Component {
     return RootComponentKt().apply(content).build()
 }
 

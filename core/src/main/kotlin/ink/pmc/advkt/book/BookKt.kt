@@ -16,7 +16,7 @@ class BookKt {
 
 }
 
-fun book(content: BookKt.() -> Unit): Book {
+inline fun book(content: BookKt.() -> Unit): Book {
     return BookKt().apply(content).build()
 }
 

@@ -25,7 +25,7 @@ class BossBarKt {
 
 }
 
-fun bossBar(content: BossBarKt.() -> Unit): BossBar {
+inline fun bossBar(content: BossBarKt.() -> Unit): BossBar {
     return BossBarKt().apply(content).build()
 }
 
@@ -33,7 +33,7 @@ fun BossBarKt.name(component: Component) {
     this.name = component
 }
 
-fun BossBarKt.name(content: RootComponentKt.() -> Unit) {
+inline fun BossBarKt.name(content: RootComponentKt.() -> Unit) {
     name(RootComponentKt().apply(content).build())
 }
 

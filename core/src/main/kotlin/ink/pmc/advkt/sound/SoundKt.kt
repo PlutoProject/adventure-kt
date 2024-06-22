@@ -30,7 +30,7 @@ class SoundKt {
 
 }
 
-fun sound(content: SoundKt.() -> Unit): Sound {
+inline fun sound(content: SoundKt.() -> Unit): Sound {
     return SoundKt().apply(content).build()
 }
 

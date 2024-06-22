@@ -23,7 +23,7 @@ class ComponentTitleKt : TitleKt {
 
 }
 
-fun title(content: ComponentTitleKt.() -> Unit): Title {
+inline fun title(content: ComponentTitleKt.() -> Unit): Title {
     return ComponentTitleKt().apply(content).build()
 }
 
@@ -31,7 +31,7 @@ fun ComponentTitleKt.mainTitle(component: Component) {
     mainTitle = component
 }
 
-fun ComponentTitleKt.mainTitle(content: RootComponentKt.() -> Unit) {
+inline fun ComponentTitleKt.mainTitle(content: RootComponentKt.() -> Unit) {
     mainTitle(RootComponentKt().apply(content).build())
 }
 
@@ -39,7 +39,7 @@ fun ComponentTitleKt.subTitle(component: Component) {
     subTitle = component
 }
 
-fun ComponentTitleKt.subTitle(content: RootComponentKt.() -> Unit) {
+inline fun ComponentTitleKt.subTitle(content: RootComponentKt.() -> Unit) {
     subTitle(RootComponentKt().apply(content).build())
 }
 
@@ -47,6 +47,6 @@ fun ComponentTitleKt.times(times: Times) {
     this.times = times
 }
 
-fun ComponentTitleKt.times(content: TitleTimesKt.() -> Unit) {
+inline fun ComponentTitleKt.times(content: TitleTimesKt.() -> Unit) {
     times(TitleTimesKt().apply(content).build())
 }
