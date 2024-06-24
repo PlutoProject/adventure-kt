@@ -9,3 +9,7 @@ fun hoverEvent(): HoverEventWithoutKt {
 inline fun showText(text: RootComponentKt.() -> Unit): HoverEventKt {
     return HoverEventKt(HoverEvent.showText(RootComponentKt().apply(text).build()))
 }
+
+fun HoverEvent<*>.kt(): HoverEventKt {
+    return HoverEventKt(this)
+}

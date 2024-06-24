@@ -21,3 +21,7 @@ fun underlined(): TextDecorationKt {
 fun italic(): TextDecorationKt {
     return TextDecorationKt(TextDecoration.ITALIC)
 }
+
+fun TextDecoration.kt(): TextDecorationKt {
+    return TextDecorationKt(this)
+}

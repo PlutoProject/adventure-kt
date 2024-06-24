@@ -48,3 +48,7 @@ fun callback(function: (Audience) -> Unit): ClickEventKt {
 fun callback(options: ClickCallback.Options, function: (Audience) -> Unit): ClickEventKt {
     return ClickEventKt(ClickEvent.callback(function, options))
 }
+
+fun ClickEvent.kt(): ClickEventKt {
+    return ClickEventKt(this)
+}

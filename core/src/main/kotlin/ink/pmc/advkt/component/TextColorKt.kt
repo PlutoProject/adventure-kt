@@ -46,20 +46,8 @@ fun hex(hex: String): TextColorKt {
     return TextColorKt(TextColor.fromHexString(hex)!!)
 }
 
-fun gradient(from: TextColor, to: TextColor, vararg more: TextColor): GradientColor {
-    return GradientColor(from, to, listOf(*more))
-}
-
 fun gradient(from: TextColorKt, to: TextColorKt, vararg more: TextColorKt): GradientColor {
     return GradientColor(from.textColor, to.textColor, more.map { it.textColor })
-}
-
-fun gradient(from: TextColorKt, to: TextColor, vararg more: TextColorKt): GradientColor {
-    return GradientColor(from.textColor, to, more.map { it.textColor })
-}
-
-fun gradient(from: TextColor, to: TextColorKt, vararg more: TextColorKt): GradientColor {
-    return GradientColor(from, to.textColor, more.map { it.textColor })
 }
 
 fun black(): TextColorKt {
@@ -124,4 +112,8 @@ fun yellow(): TextColorKt {
 
 fun white(): TextColorKt {
     return TextColorKt(NamedTextColor.WHITE)
+}
+
+fun TextColor.kt(): StyleKt {
+    return TextColorKt(this)
 }
