@@ -73,12 +73,20 @@ fun main() {
                     match("[a-zA-Z0-9]+")
                     replace {
                         text("") with insertion("") // just showcase of insertion, i dont know what can it do
+                        raw(it) // add original text
                     }
                 }
             }
             text("first")
             text("second")
             text("third")
+
+            raw(Component.text("Replace test 1").replace("aa", "bb", true))
+            raw(Component.text("Replace test 2").replace("aa") {
+                return@replace ink.pmc.advkt.component.component {
+                    raw(it) with red() // Appending original text
+                }
+            })
         }
 
         newline()
