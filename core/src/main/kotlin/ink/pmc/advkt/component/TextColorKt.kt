@@ -50,24 +50,8 @@ fun gradient(from: TextColor, to: TextColor, vararg more: TextColor): GradientCo
     return GradientColor(from, to, listOf(*more))
 }
 
-fun gradient(from: TextColorKt, to: TextColorKt, vararg more: TextColor): GradientColor {
-    return GradientColor(from.textColor, to.textColor, listOf(*more))
-}
-
-fun gradient(from: TextColor, to: TextColor, vararg more: TextColorKt): GradientColor {
-    return GradientColor(from, to, more.map { it.textColor })
-}
-
 fun gradient(from: TextColorKt, to: TextColorKt, vararg more: TextColorKt): GradientColor {
     return GradientColor(from.textColor, to.textColor, more.map { it.textColor })
-}
-
-fun gradient(from: TextColorKt, to: TextColor, vararg more: TextColor): GradientColor {
-    return GradientColor(from.textColor, to, listOf(*more))
-}
-
-fun gradient(from: TextColor, to: TextColorKt, vararg more: TextColor): GradientColor {
-    return GradientColor(from, to.textColor, listOf(*more))
 }
 
 fun gradient(from: TextColorKt, to: TextColor, vararg more: TextColorKt): GradientColor {
